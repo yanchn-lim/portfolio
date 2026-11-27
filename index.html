@@ -3,160 +3,109 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lim Yan Chun | Technical Art Portfolio</title>
-<meta name="description" content="Technical art portfolio of Lim Yan Chun, featuring real-time shaders, gameplay effects, and rendering optimisation.">
-<style>
-:root{color-scheme:dark;--bg:#121612;--panel:#202821;--ink:#f4f3df;--muted:#b8c3b2;--lime:#d4ef9b;--line:#455345}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:1rem/1.6 system-ui,sans-serif}
-main,header,footer{width:min(1120px,calc(100% - 3rem));margin-inline:auto}
-header,footer{display:flex;justify-content:space-between;gap:1rem;padding:1.2rem 0;color:var(--muted)}
-header{border-bottom:1px solid var(--line)}
-footer{border-top:1px solid var(--line);margin-top:4rem}
-a{color:var(--lime);text-underline-offset:.24em}
-h1,h2,p{margin:0}
-h1,h2{font-family:Georgia,serif;font-weight:normal;line-height:1.06}
-h1{font-size:clamp(3.2rem,9vw,7.2rem);letter-spacing:-.067em}
-h2{font-size:clamp(1.85rem,4vw,2.8rem);letter-spacing:-.035em}
-.kicker{color:var(--lime);font-size:.875rem;font-weight:650;letter-spacing:.13em;text-transform:uppercase}
-.hero{display:grid;grid-template-columns:1.2fr 1fr;align-items:end;gap:2rem;margin:clamp(2rem,7vw,5.25rem) 0 2rem}
-.hero p:last-child,.details p,.caption{color:var(--muted)}
-.hero h1{margin:.35rem 0}
-.preview{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel)}
-canvas{display:block;width:100%;height:auto;background:#192319}
-.toolbar{display:flex;flex-wrap:wrap;gap:.6rem 1rem;justify-content:space-between;align-items:center;padding:.85rem 1rem}
-.controls{display:flex;gap:.5rem;flex-wrap:wrap}
-button{border:1px solid var(--line);border-radius:6px;background:#151b15;color:var(--ink);padding:.55rem .75rem;font:inherit;cursor:pointer}
-button[aria-pressed=true]{border-color:var(--lime);color:var(--lime)}
-button:focus-visible,a:focus-visible{outline:2px solid var(--lime);outline-offset:3px}
-.caption{font-size:.875rem}
-.details{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2rem}
-article{border-top:1px solid var(--line);padding-top:1.1rem}
-article p{margin-top:.7rem}
-@media(max-width:680px){.hero,.details{grid-template-columns:1fr;gap:1rem}main,header,footer{width:calc(100% - 2rem)}}
-video{display:block;width:100%;aspect-ratio:16/9;background:#080b08;border:1px solid var(--line);border-radius:10px}
-.footage{margin:0 0 2.2rem}
-.footage h3{margin:0 0 .55rem;font-size:1rem}
-.footage p{color:var(--muted);margin-top:.55rem}
-.footage-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.2rem;margin-top:1rem}
-@media(max-width:680px){.footage-grid{grid-template-columns:1fr}}
-.intro{padding:clamp(2.5rem,9vw,6.5rem) 0 2.2rem;border-bottom:1px solid var(--line)}
-.intro h1{margin:.35rem 0 .75rem}.intro p:last-of-type{max-width:42rem;color:var(--muted)}
-.intro nav{display:flex;flex-wrap:wrap;gap:.5rem 1.25rem;margin-top:1.25rem}
-.hero h2{font-size:clamp(2.75rem,6vw,5.25rem);margin:.35rem 0}
-.guard{margin-top:4rem;border-top:1px solid var(--line);padding-top:2rem}
-.guard p{max-width:44rem;color:var(--muted);margin-top:.75rem}
-.guard a{display:inline-block;margin-top:.75rem}
-</style>
+<title>Lim Yan Chun — Technical Art</title>
+<meta name="description" content="Technical art portfolio by Lim Yan Chun. Godot fog and player visibility, Unity foliage and shaders, and WebGL performance.">
 <link rel="canonical" href="https://yanchn-lim.github.io/portfolio/">
+<style>
+:root{color-scheme:light;--paper:#f8f9f6;--ink:#191e1d;--secondary:#424e4a;--rule:#c1cbc4;--accent:#285743;--mono:Consolas,"Courier New",monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:1rem/1.55 system-ui,sans-serif}
+.wrap{width:min(1080px,calc(100% - 3rem));margin-inline:auto}
+header{padding:1.2rem 0;border-bottom:1px solid var(--rule)}
+header .wrap,footer{display:flex;justify-content:space-between;align-items:center;gap:.75rem 1.5rem;flex-wrap:wrap}
+nav{display:flex;flex-wrap:wrap;gap:.55rem 1.25rem}
+a{color:var(--accent);text-underline-offset:.22em;text-decoration-thickness:1px}
+a:hover{text-decoration-thickness:2px}
+a:focus-visible,video:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+h1,h2,h3,p,figure{margin:0}
+h1,h2,h3{line-height:1.1;letter-spacing:-.045em}
+h1{font-size:clamp(2.85rem,7vw,5.2rem);font-weight:680}
+h2{font-size:clamp(2rem,4.6vw,3.45rem);font-weight:660}
+h3{font-size:1.3rem;letter-spacing:-.025em}
+.intro{padding:clamp(2.2rem,6vw,4.75rem) 0 2rem}
+.intro p{margin-top:.45rem;color:var(--secondary);font-size:1.1rem}
+.project{padding:2rem 0 3rem;border-top:1px solid var(--rule);scroll-margin-top:1rem}
+.project-head{display:flex;justify-content:space-between;align-items:baseline;gap:.6rem 1rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.meta{font: .875rem/1.5 var(--mono);color:var(--secondary)}
+.scene{display:grid;grid-template-columns:minmax(0,2.15fr) minmax(0,1fr);align-items:start;gap:clamp(1rem,4vw,2.75rem)}
+.scene+.scene{margin-top:2.1rem}
+.scene p+p{margin-top:.75rem}
+.scene h3{margin:0 0 .65rem}
+.scene p,figcaption,.benchmark-note{color:var(--secondary)}
+video,.cover{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#151917}
+.cover{object-fit:cover}
+figcaption{font:.875rem/1.5 var(--mono);margin-top:.55rem}
+.scene a{display:inline-block;margin-top:.65rem}
+.benchmark{margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--rule)}
+.benchmark strong{display:block;font-size:clamp(1.65rem,4vw,2.65rem);line-height:1.12;letter-spacing:-.045em;font-variant-numeric:tabular-nums}
+.benchmark-note{font-size:.875rem;margin-top:.4rem}
+footer{padding:1.1rem 0 2rem;border-top:1px solid var(--rule);color:var(--secondary)}
+@media(max-width:720px){.scene{grid-template-columns:1fr}.wrap{width:calc(100% - 2rem)}header .wrap{align-items:flex-start}.project{padding-bottom:2.25rem}}
+</style>
 </head>
 <body>
-<header><span>Lim Yan Chun</span><span>Technical art portfolio</span></header>
-<main>
-<section class="intro" aria-labelledby="name">
-<p class="kicker">Technical art portfolio</p>
-<h1 id="name">Lim Yan Chun</h1>
-<p>I build real-time shaders and gameplay effects, and tune how they render on target hardware.</p>
-<nav aria-label="Portfolio projects"><a href="#project-meshi">Project Meshi</a><a href="#guarding-block-44">Guarding Block 44</a></nav>
-</section>
-<section class="hero" id="project-meshi" aria-labelledby="project">
-<div><p class="kicker">Technical art · In development</p><h2 id="project">Project Meshi</h2></div>
-<p>I built two effects to help players read the game world. Animated fog marks unexplored areas, and an outline keeps the player character visible in tall grass. <strong>Godot · C# · GLSL</strong></p>
-</section>
-<section class="footage" aria-labelledby="gameplay">
-<h2 id="gameplay">Gameplay footage</h2>
-<div class="footage-grid">
-<div><h3>Fog of war and danger zone</h3>
-<video controls playsinline preload="metadata" poster="media/fog-poster.jpg" aria-label="Fog of war and danger zone gameplay">
+<header>
+<div class="wrap">
+<nav aria-label="Projects"><a href="#project-meshi">Project Meshi</a><a href="#guarding-block-44">Guarding Block 44</a></nav>
+<nav aria-label="Profiles"><a href="https://github.com/yanchn-lim">GitHub</a><a href="https://linkedin.com/in/lim-yan-chun-046643238">LinkedIn</a></nav>
+</div>
+</header>
+<main class="wrap">
+<div class="intro">
+<h1>Lim Yan Chun</h1>
+<p>Technical art · Shaders, gameplay effects, and rendering optimisation</p>
+</div>
+<section class="project" id="project-meshi" aria-labelledby="meshi-title">
+<div class="project-head">
+<h2 id="meshi-title">Project Meshi</h2>
+<p class="meta">Godot / C# / GLSL · In development</p>
+</div>
+<div class="scene">
+<figure>
+<video controls playsinline preload="metadata" poster="media/fog-poster.jpg" aria-labelledby="fog-title">
 <source src="media/meshi-fog-of-war.mp4" type="video/mp4">
 <a href="media/meshi-fog-of-war.mp4">Download the fog clip</a>
 </video>
-<p>At 0:06, the player crosses into the danger zone, pauses as the fog thickens, then steps back onto playable terrain.</p></div>
-<div><h3>Player outline in tall grass</h3>
-<video controls playsinline preload="metadata" poster="media/outline-poster.jpg" aria-label="Player outline in tall grass gameplay">
+<figcaption>In-engine capture · Danger-zone crossing at 0:06</figcaption>
+</figure>
+<div>
+<h3 id="fog-title">Fog of war</h3>
+<p>I used an exploration mask to track which parts of the map the player had visited. A post-process shader uses that mask to animate the fog boundary.</p>
+<p>A second mask marks the playable area. The fog thickens when the player crosses out of it and recedes when they step back.</p>
+</div>
+</div>
+<div class="scene">
+<figure>
+<video controls playsinline preload="metadata" poster="media/outline-poster.jpg" aria-labelledby="outline-title">
 <source src="media/meshi-player-outline-deep-grass.mp4" type="video/mp4">
 <a href="media/meshi-player-outline-deep-grass.mp4">Download the outline clip</a>
 </video>
-<p>The outline stays visible as the player walks deeper into tall grass and the foliage covers the character.</p></div>
+</figure>
+<div>
+<h3 id="outline-title">Player outline</h3>
+<p>I tied the outline to the tall-grass detector. The outline switches on when the player enters cover and switches off when they leave. In the clip, the player walks deep enough into the patch that the foliage hides most of the character.</p>
+</div>
 </div>
 </section>
-<section aria-label="Interactive effect illustration" class="preview">
-<canvas id="field" width="1000" height="440" role="img" aria-label="Illustration showing a character in tall grass beside a fogged area"></canvas>
-<div class="toolbar"><div class="caption">Interactive illustration</div>
-<div class="controls"><button type="button" id="fog" aria-pressed="true">Fog of war</button><button type="button" id="outline" aria-pressed="true">Player outline</button></div></div>
-</section>
-<section class="details" aria-label="Effect breakdown">
-<article><h2>Animated fog of war</h2><p>I used an exploration mask to distinguish explored areas from unexplored areas. The mask drives a post-processing shader that animates the fog along the boundary.</p></article>
-<article><h2>Player outline</h2><p>I added an outline that appears in tall grass, where foliage can obscure the character. The outline gives players a clear position cue while keeping the cover visible.</p></article>
-</section>
-<section class="guard" id="guarding-block-44" aria-labelledby="guard-title">
-<p class="kicker">Unity · Shader Graph · WebGL</p>
+<section class="project" id="guarding-block-44" aria-labelledby="guard-title">
+<div class="project-head">
 <h2 id="guard-title">Guarding Block 44</h2>
-<p>I led graphics development on a four-person Screamology game jam team, modelled the foliage, and built a custom sky shader.</p>
-<p>I tuned GPU instancing and Unity URP settings. The combined optimisation pass improved frame rate by 16% in a repeatable 1920 × 1200 WebGL benchmark.</p>
-<a href="https://dingledangledongle.itch.io/guarding-block-44">Play Guarding Block 44</a>
+<p class="meta">Unity URP / Shader Graph / WebGL · Screamology 2026</p>
+</div>
+<div class="scene">
+<figure><img class="cover" src="media/guarding-block-44-cover.webp" width="1200" height="670" loading="lazy" alt="Guarding Block 44 title card over the game's night sky and foliage"></figure>
+<div>
+<p>I led graphics on our four-person jam team, modelled the foliage, and built the night sky in Unity Shader Graph.</p>
+<p>I grouped grass and foliage by mesh for GPU instancing, culled distant foliage, and reduced shadow-map resolution for the WebGL build.</p>
+<a href="https://dingledangledongle.itch.io/guarding-block-44">Play Guarding Block 44 on itch.io</a>
+<div class="benchmark">
+<strong>99.5 to 115.7 FPS</strong>
+<p class="benchmark-note">16% gain across the combined changes. Three matched camera sweeps per build in Chrome at 1920 × 1200 on a Radeon RX 5700 XT.</p>
+</div>
+</div>
+</div>
 </section>
 </main>
-<footer><span>Lim Yan Chun</span><div><a href="https://github.com/yanchn-lim">GitHub</a> · <a href="https://linkedin.com/in/lim-yan-chun-046643238">LinkedIn</a></div></footer>
-<script>
-const canvas = document.querySelector("#field");
-const ctx = canvas.getContext("2d");
-const fog = document.querySelector("#fog");
-const outline = document.querySelector("#outline");
-const reduced = matchMedia("(prefers-reduced-motion: reduce)");
-function enabled(button) { return button.getAttribute("aria-pressed") === "true"; }
-for (const button of [fog, outline]) {
-  button.addEventListener("click", () => {
-    button.setAttribute("aria-pressed", String(!enabled(button)));
-    paint(performance.now());
-  });
-}
-function grain(i) { return (Math.sin(i * 21.123 + 34.6) * 3351.541 % 1 + 1) % 1; }
-function paint(time) {
-  const t = reduced.matches ? 0 : time / 1000;
-  ctx.fillStyle = "#27372a";
-  ctx.fillRect(0, 0, 1000, 440);
-  for (let y = 0; y < 11; y++) {
-    for (let x = 0; x < 25; x++) {
-      ctx.fillStyle = grain(x + y * 25) > .5 ? "#293b2d" : "#304333";
-      ctx.fillRect(x * 40, y * 40, 39, 39);
-    }
-  }
-  ctx.fillStyle = "#536048";
-  ctx.beginPath();
-  ctx.moveTo(0, 273); ctx.lineTo(255, 250); ctx.lineTo(465, 315); ctx.lineTo(1000, 252);
-  ctx.lineTo(1000, 320); ctx.lineTo(460, 375); ctx.lineTo(246, 319); ctx.lineTo(0, 338);
-  ctx.fill();
-  for (let i = 0; i < 330; i++) {
-    const x = grain(i) * 1000, y = grain(i + 392) * 440;
-    if (x < 170 || x > 820 || (y > 285 && y < 341)) continue;
-    const height = 9 + grain(i + 53) * 22;
-    ctx.strokeStyle = ["#526849", "#668256", "#7a9765"][i % 3];
-    ctx.lineWidth = 2.5;
-    ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x - 5, y - height);
-    ctx.moveTo(x, y); ctx.lineTo(x + 8, y - height * .8); ctx.stroke();
-  }
-  ctx.beginPath(); ctx.arc(400, 224, 11, 0, Math.PI * 2);
-  ctx.rect(392, 237, 16, 19);
-  ctx.fillStyle = enabled(outline) ? "#f0e8c4" : "#566247";
-  ctx.fill();
-  if (enabled(outline)) { ctx.lineWidth = 4; ctx.strokeStyle = "#f4ca76"; ctx.stroke(); }
-  if (enabled(fog)) {
-    const shade = ctx.createLinearGradient(520, 0, 805, 0);
-    shade.addColorStop(0, "rgba(15,23,19,0)");
-    shade.addColorStop(1, "rgba(14,20,18,.97)");
-    ctx.fillStyle = shade; ctx.fillRect(520, 0, 480, 440);
-    for (let i = 0; i < 10; i++) {
-      const x = 590 + i * 44 + Math.sin(t * .7 + i) * 12, y = grain(i + 125) * 440;
-      const plume = ctx.createRadialGradient(x,y,0,x,y,95);
-      plume.addColorStop(0,"rgba(156,175,153,.10)"); plume.addColorStop(1,"rgba(156,175,153,0)");
-      ctx.fillStyle = plume; ctx.fillRect(x-95,y-95,190,190);
-    }
-  }
-}
-function animate(time) { paint(time); if (!reduced.matches) requestAnimationFrame(animate); }
-reduced.addEventListener("change", () => { if (!reduced.matches) requestAnimationFrame(animate); });
-animate(0);
-</script>
+<footer class="wrap"><span>Lim Yan Chun</span><a href="mailto:yanchn.lim@gmail.com">Email</a></footer>
 </body>
 </html>
