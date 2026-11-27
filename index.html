@@ -6,54 +6,20 @@
 <title>Lim Yan Chun — Technical Art</title>
 <meta name="description" content="Technical art portfolio by Lim Yan Chun. Godot fog and player visibility, Unity foliage and shaders, and WebGL performance.">
 <link rel="canonical" href="https://yanchn-lim.github.io/portfolio/">
-<style>
-:root{color-scheme:light;--paper:#f8f9f6;--ink:#191e1d;--secondary:#424e4a;--rule:#c1cbc4;--accent:#285743;--mono:Consolas,"Courier New",monospace}
-*{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font:1rem/1.55 system-ui,sans-serif}
-.wrap{width:min(1080px,calc(100% - 3rem));margin-inline:auto}
-header{padding:1.2rem 0;border-bottom:1px solid var(--rule)}
-header .wrap,footer{display:flex;justify-content:space-between;align-items:center;gap:.75rem 1.5rem;flex-wrap:wrap}
-nav{display:flex;flex-wrap:wrap;gap:.55rem 1.25rem}
-a{color:var(--accent);text-underline-offset:.22em;text-decoration-thickness:1px}
-a:hover{text-decoration-thickness:2px}
-a:focus-visible,video:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
-h1,h2,h3,p,figure{margin:0}
-h1,h2,h3{line-height:1.1;letter-spacing:-.045em}
-h1{font-size:clamp(2.85rem,7vw,5.2rem);font-weight:680}
-h2{font-size:clamp(2rem,4.6vw,3.45rem);font-weight:660}
-h3{font-size:1.3rem;letter-spacing:-.025em}
-.intro{padding:clamp(2.2rem,6vw,4.75rem) 0 2rem}
-.intro p{margin-top:.45rem;color:var(--secondary);font-size:1.1rem}
-.project{padding:2rem 0 3rem;border-top:1px solid var(--rule);scroll-margin-top:1rem}
-.project-head{display:flex;justify-content:space-between;align-items:baseline;gap:.6rem 1rem;flex-wrap:wrap;margin-bottom:1.5rem}
-.meta{font: .875rem/1.5 var(--mono);color:var(--secondary)}
-.scene{display:grid;grid-template-columns:minmax(0,2.15fr) minmax(0,1fr);align-items:start;gap:clamp(1rem,4vw,2.75rem)}
-.scene+.scene{margin-top:2.1rem}
-.scene p+p{margin-top:.75rem}
-.scene h3{margin:0 0 .65rem}
-.scene p,figcaption,.benchmark-note{color:var(--secondary)}
-video,.cover{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#151917}
-.cover{object-fit:cover}
-figcaption{font:.875rem/1.5 var(--mono);margin-top:.55rem}
-.scene a{display:inline-block;margin-top:.65rem}
-.benchmark{margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--rule)}
-.benchmark strong{display:block;font-size:clamp(1.65rem,4vw,2.65rem);line-height:1.12;letter-spacing:-.045em;font-variant-numeric:tabular-nums}
-.benchmark-note{font-size:.875rem;margin-top:.4rem}
-footer{padding:1.1rem 0 2rem;border-top:1px solid var(--rule);color:var(--secondary)}
-@media(max-width:720px){.scene{grid-template-columns:1fr}.wrap{width:calc(100% - 2rem)}header .wrap{align-items:flex-start}.project{padding-bottom:2.25rem}}
-</style>
+<link rel="stylesheet" href="portfolio.css">
 </head>
 <body>
 <header>
 <div class="wrap">
 <nav aria-label="Projects"><a href="#project-meshi">Project Meshi</a><a href="#guarding-block-44">Guarding Block 44</a></nav>
-<nav aria-label="Profiles"><a href="https://github.com/yanchn-lim">GitHub</a><a href="https://linkedin.com/in/lim-yan-chun-046643238">LinkedIn</a></nav>
+<a href="mailto:yanchn.lim@gmail.com">Email</a>
 </div>
 </header>
 <main class="wrap">
 <div class="intro">
 <h1>Lim Yan Chun</h1>
-<p>Technical art · Shaders, gameplay effects, and rendering optimisation</p>
+<p class="role">Technical art portfolio</p>
+<p>I build shaders and gameplay effects that make game worlds easier to read, and optimise rendering for the web.</p>
 </div>
 <section class="project" id="project-meshi" aria-labelledby="meshi-title">
 <div class="project-head">
@@ -61,29 +27,34 @@ footer{padding:1.1rem 0 2rem;border-top:1px solid var(--rule);color:var(--second
 <p class="meta">Godot / C# / GLSL · In development</p>
 </div>
 <div class="scene">
+<div class="scene-heading">
+<h3 id="fog-title">Fog of war</h3>
+<p id="fog-note">At 0:06, watch the fog thicken as the player crosses into the danger zone.</p>
+</div>
 <figure>
-<video controls playsinline preload="metadata" poster="media/fog-poster.jpg" aria-labelledby="fog-title">
+<video controls playsinline preload="metadata" poster="media/fog-poster.jpg" aria-labelledby="fog-title" aria-describedby="fog-note">
 <source src="media/meshi-fog-of-war.mp4" type="video/mp4">
 <a href="media/meshi-fog-of-war.mp4">Download the fog clip</a>
 </video>
-<figcaption>In-engine capture · Danger-zone crossing at 0:06</figcaption>
 </figure>
-<div>
-<h3 id="fog-title">Fog of war</h3>
+<div class="scene-copy">
 <p>I used an exploration mask to track which parts of the map the player had visited. A post-process shader uses that mask to animate the fog boundary.</p>
 <p>A second mask marks the playable area. The fog thickens when the player crosses out of it and recedes when they step back.</p>
 </div>
 </div>
 <div class="scene">
+<div class="scene-heading">
+<h3 id="outline-title">Player outline</h3>
+<p id="outline-note">Watch the outline keep the player visible as the grass hides the character.</p>
+</div>
 <figure>
-<video controls playsinline preload="metadata" poster="media/outline-poster.jpg" aria-labelledby="outline-title">
+<video controls playsinline preload="none" poster="media/outline-poster.jpg" aria-labelledby="outline-title" aria-describedby="outline-note">
 <source src="media/meshi-player-outline-deep-grass.mp4" type="video/mp4">
 <a href="media/meshi-player-outline-deep-grass.mp4">Download the outline clip</a>
 </video>
 </figure>
-<div>
-<h3 id="outline-title">Player outline</h3>
-<p>I tied the outline to the tall-grass detector. The outline switches on when the player enters cover and switches off when they leave. In the clip, the player walks deep enough into the patch that the foliage hides most of the character.</p>
+<div class="scene-copy">
+<p>I tied the outline to the tall-grass detector. The outline switches on when the player enters cover and switches off when they leave.</p>
 </div>
 </div>
 </section>
@@ -92,20 +63,24 @@ footer{padding:1.1rem 0 2rem;border-top:1px solid var(--rule);color:var(--second
 <h2 id="guard-title">Guarding Block 44</h2>
 <p class="meta">Unity URP / Shader Graph / WebGL · Screamology 2026</p>
 </div>
-<div class="scene">
+<div class="scene game">
 <figure><img class="cover" src="media/guarding-block-44-cover.webp" width="1200" height="670" loading="lazy" alt="Guarding Block 44 title card over the game's night sky and foliage"></figure>
-<div>
+<div class="scene-copy">
 <p>I led graphics on our four-person jam team, modelled the foliage, and built the night sky in Unity Shader Graph.</p>
 <p>I grouped grass and foliage by mesh for GPU instancing, culled distant foliage, and reduced shadow-map resolution for the WebGL build.</p>
-<a href="https://dingledangledongle.itch.io/guarding-block-44">Play Guarding Block 44 on itch.io</a>
 <div class="benchmark">
-<strong>99.5 to 115.7 FPS</strong>
-<p class="benchmark-note">16% gain across the combined changes. Three matched camera sweeps per build in Chrome at 1920 × 1200 on a Radeon RX 5700 XT.</p>
+<strong>16% higher frame rate</strong>
+<p>99.5 to 115.7 FPS after the combined changes.</p>
+<p class="benchmark-note">Three matched camera sweeps per build in Chrome at 1920 × 1200 on a Radeon RX 5700 XT.</p>
 </div>
+<a class="play" href="https://dingledangledongle.itch.io/guarding-block-44">Play on itch.io</a>
 </div>
 </div>
 </section>
 </main>
-<footer class="wrap"><span>Lim Yan Chun</span><a href="mailto:yanchn.lim@gmail.com">Email</a></footer>
+<footer class="wrap">
+<span>Lim Yan Chun</span>
+<nav aria-label="Contact and profiles"><a href="mailto:yanchn.lim@gmail.com">Email</a><a href="https://github.com/yanchn-lim">GitHub</a><a href="https://linkedin.com/in/lim-yan-chun-046643238">LinkedIn</a></nav>
+</footer>
 </body>
 </html>
